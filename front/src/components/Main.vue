@@ -3,20 +3,25 @@
         <div class = "login_grid">
             <div>
                 <img src="../assets/ico.png" width="10%">
-                <p class = "slock">SLOCK.</p>
+                <p class = "slock">{{msg}}</p>
                 <p class = "infoSlock">새로운 기숙사 문관리 시스템</p>
             </div>
             <div class = "login_box">
-               <p class = "idBox"><input class = "inputBox" type="text" name="id" placeholder="학생이름"></p>
-               <p><input class = "inputBox" type="password" name="password" placeholder="비밀번호"></p>
-               <p class = "loginStillBox"><input type="checkbox" id="stillLogin"><label for="stillLogin"><span class = "loginOption">로그인 상태 유지</span></label></p>
+                <input type="text" class="form__field" placeholder="학생이름" name="name" id='name' required autocomplete="off"/>
+                <label for="name" class="form__label">학생이름</label>
+            </div>
+            <div class="login_box2">
+                <input type="password" class="form__field" placeholder="비밀번호" name="password" id='password' required autocomplete="off"/>
+                <label for="password" class="form__label">비밀번호</label>
+                <p class = "loginStillBox"><input type="checkbox" id="stillLogin"><label for="stillLogin"><span class = "loginOption">로그인 상태 유지</span></label></p>              
             </div>
             <div class = "submitBtn">
-                <img src="../assets/submit.png" width="16%">
+                <img class = "default" src = "../assets/submit.png">
+                <img class = "defaultHover" src = "../assets/submit_hover.png">
             </div>
             <div class = "helpDiv">
-                <p class = "loginHelp">계정 생성</p>
-                <p class = "loginHelp">로그인이 안 되시나요?<span class = "version">V0.1</span></p>
+                <span class = "HelpCreate">계정 생성</span><br><br>
+                <span class = "HelpWrong">로그인이 안 되시나요?</span><span class = "version">V0.1</span>
             </div>          
         </div>
         <div class = "image_grid">
@@ -27,10 +32,68 @@
     </div>
 </template>
 
-<style>
+<script>
+export default {
+    data () {
+        return {
+            msg : 'SLOCK.',
+        }
+    }
+}
+
+</script>
+
+<style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+
+.form__field {
+  width: 60%;
+  border: 0;
+  border-bottom: 2px solid #777777;
+  outline: 0;
+  font-size: 1.3rem;
+  color: white;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1.8rem;
+    cursor: text;
+    top: 20px;
+  }
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #777777;
+}
+
+.form__field:focus {
+  ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #777777;
+    font-weight:700;    
+  }
+    padding-bottom: 6px;
+    border-bottom: 2px solid #6C63FF;
+    font-weight: 700;
+    border-width: 3px;
+}
 
 body {
     margin: 0;
@@ -78,8 +141,19 @@ html {
 }
 
 .login_box {
-    padding-top:3%;
-    padding-bottom:5%;
+    position:relative;
+    padding: 15px 0 0;
+    margin-top: 10px;
+    width:100%;
+    padding-top: 2%;
+    padding-bottom:3%;
+}
+
+.login_box2 {
+    position:relative;
+    padding: 15px 0 0;
+    margin-top: 10px;
+    width:100%;
 }
 
 .idBox{
@@ -97,38 +171,53 @@ html {
     padding-left:3%;
 }
 
-.inputBox {
-    padding : 3.5%;
-    width:50%;
-    border-radius: 8px;
-    border:none;
-    background:#bdbdbd;
-}
-
-.inputBox::placeholder{
-    font-size:1.5rem;
-    color:#777777;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
 .submitBtn {
-    padding-left:20%;
-    padding-top: 10%;
+    top:5%;
+    margin-left: 22%;
+    width:12%;
+    height:8%;
+    position: relative;
+}
+
+.submitBtn img {
+    left: -5%;
+    top:-15%;
+    width:110%;
+
+    position: absolute;
+}
+
+.submitBtn > .defaultHover {
+    opacity: 0;
+    translate: opacity 1s;
+}
+
+.submitBtn:hover > .defaultHover {
+    opacity: 1;
 }
 
 .helpDiv {
-    padding-top: 10%;
+    padding-top: 20%;
 }
 
-.loginHelp {
+.HelpCreate, .HelpWrong {
     color:#777777;
     font-size:1.5rem;
     font-weight: 500;
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+.HelpCreate:hover, .HelpWrong:hover {
+    color:white;
+    cursor: pointer;
+}
+
 .version {
-    padding-left:30%;
+    padding-left:32%;
+    color:#777777;
+    font-size:1.5rem;
+    font-weight: 500;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 </style>
